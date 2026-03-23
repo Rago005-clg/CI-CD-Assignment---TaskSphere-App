@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+
+    steps:
+      - checkout
+
+      - setup_remote_docker
+
+      - run:
+          name: Build Backend Docker Image
+          command: docker build -t backend ./backend
+
+      - run:
+          name: Build Frontend Docker Image
+          command: docker build -t frontend ./frontend
+
+workflows:
+  build:
+    jobs:
+      - build
